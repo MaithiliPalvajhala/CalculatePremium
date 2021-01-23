@@ -16,15 +16,14 @@ namespace CalculatePremium.Controllers
     {
         CalculatePremiumModel calcPremModel = new CalculatePremiumModel();
         [HttpGet]
-       [ActionName("GetMonthlyDeathPremium")]
+       [ActionName("GetOccupationFactor")]
        [EnableCors(origins: "*", headers: "*", methods: "*")]
-        public decimal GetMonthlyDeathPremium(string Occupation)
+        public decimal GetOccupationFactor(string Occupation)
         {
             try
             {
                 var Factor = calcPremModel.GetOccupationFactor(Occupation);
                 return (decimal)Factor;
-
             }
             catch (Exception ex)
             {

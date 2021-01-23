@@ -10,12 +10,6 @@ using System.Web.Http.Cors;
 
 namespace CalculatePremium.Models
 {
-    public class CalculatePremiumInputs
-    {
-        public int Age;
-        public decimal deathSumInsured;
-        public string Occupation;
-    }
     public class CalculatePremiumModel
     {
         TAL_PremimumEntities premEntities = new TAL_PremimumEntities();
@@ -24,8 +18,6 @@ namespace CalculatePremium.Models
         {
             try
             {
-                var occ = new ObjectParameter("occupation", occupation);
-
                 var result = premEntities.sp_GetOccupationRateFactor(occupation);
                 return (decimal)result.FirstOrDefault();
             }
