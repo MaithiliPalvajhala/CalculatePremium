@@ -4,31 +4,35 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TAL_PremimumModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CalcPremiumDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <Function Name="sp_GetOccupationRateFactor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="occupation" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_getOccupations" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <EntityContainer Name="TAL_PremimumModelStoreContainer" />
-      </Schema></edmx:StorageModels>
+        <EntityContainer Name="CalcPremiumDBModelStoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="TAL_PremimumModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="TAL_PremimumEntities" annotation:LazyLoadingEnabled="true" >
+      <Schema Namespace="CalcPremiumDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CalcPremiumDBEntitiesnew" annotation:LazyLoadingEnabled="true" >
           <FunctionImport Name="sp_GetOccupationRateFactor" ReturnType="Collection(Decimal)">
-          <Parameter Name="occupation" Mode="In" Type="String" />
+            <Parameter Name="occupation" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="sp_getOccupations" />
+          <FunctionImport Name="sp_getOccupations" ReturnType="Collection(String)" />
+          <FunctionImport Name="sp_GetOccupationRateFactor1" ReturnType="Collection(Decimal)">
+            <Parameter Name="occupation" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TAL_PremimumModelStoreContainer" CdmEntityContainer="TAL_PremimumEntities" >
-          <FunctionImportMapping FunctionImportName="sp_GetOccupationRateFactor" FunctionName="TAL_PremimumModel.Store.sp_GetOccupationRateFactor" />
-          <FunctionImportMapping FunctionImportName="sp_getOccupations" FunctionName="TAL_PremimumModel.Store.sp_getOccupations">
-          </FunctionImportMapping>
+        <EntityContainerMapping StorageEntityContainer="CalcPremiumDBModelStoreContainer" CdmEntityContainer="CalcPremiumDBEntitiesnew" >
+          <FunctionImportMapping FunctionImportName="sp_GetOccupationRateFactor" FunctionName="CalcPremiumDBModel.Store.sp_GetOccupationRateFactor" />
+          <FunctionImportMapping FunctionImportName="sp_getOccupations" FunctionName="CalcPremiumDBModel.Store.sp_getOccupations" />
+          <FunctionImportMapping FunctionImportName="sp_GetOccupationRateFactor1" FunctionName="CalcPremiumDBModel.Store.sp_GetOccupationRateFactor" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

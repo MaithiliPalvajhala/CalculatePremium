@@ -11,7 +11,7 @@ namespace CalculatePremium.Models
 {
     using System;
     
-    public partial class sp_getOccupations_Result
+    public partial class DB_getOccupations1_Result
     {
         public string occupation { get; set; }
     }

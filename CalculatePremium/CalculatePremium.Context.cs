@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CalculatePremium.Models
+namespace CalculatePremium
 {
     using System;
     using System.Data.Entity;
@@ -15,10 +15,10 @@ namespace CalculatePremium.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class TAL_PremimumEntities : DbContext
+    public partial class CalcPremiumDBEntitiesnew : DbContext
     {
-        public TAL_PremimumEntities()
-            : base("name=TAL_PremimumEntities")
+        public CalcPremiumDBEntitiesnew()
+            : base("name=CalcPremiumDBEntitiesnew")
         {
         }
     
@@ -37,9 +37,18 @@ namespace CalculatePremium.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("sp_GetOccupationRateFactor", occupationParameter);
         }
     
-        public virtual int sp_getOccupations()
+        public virtual ObjectResult<string> sp_getOccupations()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_getOccupations");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_getOccupations");
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> sp_GetOccupationRateFactor1(string occupation)
+        {
+            var occupationParameter = occupation != null ?
+                new ObjectParameter("occupation", occupation) :
+                new ObjectParameter("occupation", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("sp_GetOccupationRateFactor1", occupationParameter);
         }
     }
 }

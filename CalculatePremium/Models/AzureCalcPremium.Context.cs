@@ -15,10 +15,10 @@ namespace CalculatePremium.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class TAL_PremimumEntities : DbContext
+    public partial class TAL_PremiumEntities : DbContext
     {
-        public TAL_PremimumEntities()
-            : base("name=TAL_PremimumEntities")
+        public TAL_PremiumEntities()
+            : base("name=TAL_PremiumEntities")
         {
         }
     
@@ -37,9 +37,23 @@ namespace CalculatePremium.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("sp_GetOccupationRateFactor", occupationParameter);
         }
     
-        public virtual int sp_getOccupations()
+        public virtual ObjectResult<string> sp_getOccupations()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_getOccupations");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_getOccupations");
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> sp_GetOccupationRateFactorAzure(string occupation)
+        {
+            var occupationParameter = occupation != null ?
+                new ObjectParameter("occupation", occupation) :
+                new ObjectParameter("occupation", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("sp_GetOccupationRateFactorAzure", occupationParameter);
+        }
+    
+        public virtual ObjectResult<DB_getOccupations1_Result> sp_getOccupationsAzure()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DB_getOccupations1_Result>("sp_getOccupationsAzure");
         }
     }
 }
